@@ -9,7 +9,6 @@ import { Header } from './components/common';
 import secrets from '../.secrets.json';
 
 class App extends Component {
-
   componentWillMount() {
     console.log(secrets);
     const config = {
@@ -27,7 +26,7 @@ class App extends Component {
     return (
       <Provider store={createStore(reducers)}>
         <View>
-          <Header headerText='Manager' />
+          <Header headerText="Manager" />
           <LoginForm />
         </View>
       </Provider>
