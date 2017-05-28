@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
-import reducers from './reducers';
-import LoginForm from './components/LoginForm';
-import { Header } from './components/common';
+import ReduxThunk from 'redux-thunk';
 import secrets from '../.secrets.json';
+
+import reducers from './reducers';
+import Router from './Router';
 
 class App extends Component {
   componentWillMount() {
-    console.log(secrets);
     const config = {
       apiKey: secrets.firebase.apiKey,
       authDomain: 'authentication-2bd9d.firebaseapp.com',
@@ -24,10 +24,9 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
         <View>
-          <Header headerText="Manager" />
-          <LoginForm />
+          <Router />
         </View>
       </Provider>
     );
